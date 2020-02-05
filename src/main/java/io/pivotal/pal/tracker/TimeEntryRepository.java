@@ -12,7 +12,7 @@ public interface TimeEntryRepository {
 
     public TimeEntry create(TimeEntry entry);
 
-    public TimeEntry update(long param, TimeEntry timeEntry);
+    public TimeEntry update(long id, TimeEntry timeEntry);
 
     public void delete(long query);
 }
