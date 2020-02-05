@@ -12,9 +12,9 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository {
     private long currentID = 1L;
     private HashMap<Long,TimeEntry> storage = new HashMap<>();
 
-    public InMemoryTimeEntryRepository() {
+    public InMemoryTimeEntryRepository() { }
 
-    }
+    @Override
     public TimeEntry create(TimeEntry timeEntry) {
         TimeEntry newTimeEntry = timeEntry;
         newTimeEntry.setId(currentID);
@@ -22,10 +22,12 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository {
         currentID++;
         return timeEntry;
     }
+    @Override
     public TimeEntry find(long userId) {
         return storage.get(userId);
     }
 
+    @Override
     public List<TimeEntry> list() {
         List<TimeEntry> listofTimeEntries = new ArrayList<>();
         for (Long key : storage.keySet()) {
@@ -34,10 +36,12 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository {
         return listofTimeEntries;
     }
 
+    @Override
     public void delete(long userId) {
         storage.remove(userId);
     }
 
+    @Override
     public TimeEntry update(long userId, TimeEntry timeEntry) {
         timeEntry.setId(userId);
         storage.replace(userId,timeEntry);
