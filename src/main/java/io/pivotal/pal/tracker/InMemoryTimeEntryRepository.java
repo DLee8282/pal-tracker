@@ -1,25 +1,29 @@
 package io.pivotal.pal.tracker;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@Repository
 public class InMemoryTimeEntryRepository implements TimeEntryRepository {
-    private HashMap<Long,TimeEntry> storage;
+
+    private long currentID = 1L;
+    private HashMap<Long,TimeEntry> storage = new HashMap<>();
 
     public InMemoryTimeEntryRepository() {
 
     }
-
     public TimeEntry create(TimeEntry timeEntry) {
-        long getID = timeEntry.getId(timeEntry);
-        //storage.put(timeEntry.getId(timeEntry),timeEntry);
+        TimeEntry newTimeEntry = timeEntry;
+        newTimeEntry.setId(currentID);
+        storage.put(currentID,newTimeEntry);
+        currentID++;
         return timeEntry;
     }
-    public TimeEntry find(long query) {
-        return storage.get(query);
+    public TimeEntry find(long userId) {
+        return storage.get(userId);
     }
 
     public List<TimeEntry> list() {
@@ -30,12 +34,14 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository {
         return listofTimeEntries;
     }
 
-    public void delete(long query) {
-        storage.remove(query);
+    public void delete(long userId) {
+        storage.remove(userId);
     }
 
-    public TimeEntry update(long param, TimeEntry timeEntry) {
-        TimeEntry gottenEntry = storage.put(param,timeEntry);
-        return gottenEntry;
+    public TimeEntry update(long userId, TimeEntry timeEntry) {
+        timeEntry.setId(userId);
+        storage.replace(userId,timeEntry);
+        TimeEntry getEntry = storage.get(userId);
+        return getEntry;
     }
 }

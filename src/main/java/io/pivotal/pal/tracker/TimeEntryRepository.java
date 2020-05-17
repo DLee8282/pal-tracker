@@ -1,10 +1,10 @@
 package io.pivotal.pal.tracker;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Repository
+@Component
 public interface TimeEntryRepository {
     public TimeEntry find(long query);
 
