@@ -13,6 +13,8 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
+    - name: Make gradlew executable  
+      run: chmod +x ./gradlew
     - name: Build with Gradle
       run: ./gradlew build
     - name: Publish artifact
@@ -48,3 +50,4 @@ jobs:
         CF_SPACE: ${{ secrets.CF_SPACE }}
         CF_USERNAME: ${{ secrets.CF_USERNAME }}
         CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+
