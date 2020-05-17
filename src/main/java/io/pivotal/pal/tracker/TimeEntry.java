@@ -22,10 +22,7 @@ public class TimeEntry {
     }
 
     public TimeEntry(long projectId, long userId, LocalDate date, int hours) {
-        this. projectId = projectId;
-        this.date = date;
-        this.hours = hours;
-        this.userId = userId;
+
     }
 
     public long getId(TimeEntry timeEntry) {
